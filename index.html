@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding of Wyvanny & Destra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<body class="locked">
+
+    <div class="bg-fixed"></div>
+    <div class="bg-overlay"></div>
+
+    <audio id="nasheed" loop preload="none">
+        <source src="Sezairi - It's You (Official Music Video).mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="music-btn" onclick="toggleMusic()" style="display: none;">♫</div>
+
+    <section class="hero">
+        <h3 class="fade-in">THE WEDDING OF</h3>
+        <h1 class="couple-title">Wyvanny <br> & <br> Destra</h1>
+        <h3 class="date-text">28 Maret 2026</h3>
+        <button class="btn-map" onclick="openInvitation()">Open Invitation</button>
+    </section>
+
+    <main id="main-invitation" style="display: none;">
+        <section id="main-content">
+            <h2 class="fade-in">Wedding Invitation</h2>
+            <h1 class="couple-title">Wyvanny dan Destra</h1>
+
+            <div class="mempelai-box">
+                <div class="arch-frame">
+                    <img src="prewed1.jpg">
+                </div>
+            </div>
+
+            <div class="ucapan">
+                " Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan dari jenismu sendiri,
+                supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang.
+                sesungguhnya pada yang demikian itu benar - benar terdapat tanda - tanda bagi kaum yang berpikir. "
+                <br>
+                <center> (Ar-Rum: 21) </center>
+            </div>
+
+            <h2 style="margin-top: 150px; margin-bottom: 10px;"> Bismillahirrahmanirrahim </h2>
+            <h2 style="margin-top: 0; margin-bottom: 10px;"> ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ </h2>
+
+            <div class="ucapan">
+                <p style="margin-top: 0;"> memohon rahmat dan ridho ALLAH SWT, kami mengundang bapak/ibu/saudara/i sekalian untuk
+                    menghadiri acara pernikahan kami</p>
+            </div>
+
+            <div class="mempelai-box">
+                <div class="arch-frame">
+                    <img src="prewed16.jpg" alt="Wyvanny Della">
+                </div>
+                <h2 class="script-name">Wyvanny Della, S.H</h2>
+                <p class="ucapan">Putri ke-4 dari Bapak H. Daswir St. Rajo Mudo (Alm) & Ibu Hj. Zurnila</p>
+            </div>
+
+            <div class="divider-ampersand">&</div>
+
+            <div class="mempelai-box">
+                <div class="arch-frame">
+                    <img src="prewed17.jpg" alt="Destra Panca">
+                </div>
+                <h2 class="script-name">Destra Panca Syahputra, S.H</h2>
+                <p class="ucapan">Putra ke-5 dari Bapak Firmansyah (Alm) & Ibu Larasati</p>
+            </div>
+        </section>
+
+        <section class="jarak">
+            <h1 class="section-title title-besar">Save The Date</h1>
+
+            <div class="countdown-container">
+                <div class="countdown-row">
+                    <div class="count-box large"><span id="days">00</span>
+                        <p>Hari</p>
+                    </div>
+                </div>
+                <div class="countdown-row" style="margin-top: 10px;">
+                    <div class="count-box"><span id="hours">00</span>
+                        <p>Jam</p>
+                    </div>
+                    <div class="count-box"><span id="mins">00</span>
+                        <p>Menit</p>
+                    </div>
+                    <div class="count-box"><span id="secs">00</span>
+                        <p>Detik</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kata" style="margin-top: 25px;">
+                <p>Kami memohon kehadiran Bapak/Ibu/Saudara/i dalam pelaksanaan Akad Nikah dan Resepsi Pernikahan Kami
+                    yang akan diselengarakan Pada :</p>
+                <div class="tanggal-desain">
+                    <p class="hari-teks">Sabtu</p>
+                    <div class="tgl-row">
+                        <span>Maret</span>
+                        <div class="garis-pembatas"></div>
+                        <span class="tgl-angka">28</span>
+                        <div class="garis-pembatas"></div>
+                        <span>2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="renggang">
+                <p class="subjudul">Akad Nikah</p>
+                <p class="kata">Akan dilaksanakan pada : </p>
+                <p class="kata">Sabtu, 28 Maret 2026<br>09.00 WIB</p>
+            </div>
+
+            <div class="renggang">
+                <p class="subjudul">Resepsi Pernikahan</p>
+                <p class="kata">Akan dilaksanakan pada : </p>
+                <p class="kata">Sabtu, 28 Maret 2026<br>11.00 - 16.00 WIB</p>
+            </div>
+
+            <div class="renggang">
+                <p class="subjudul">Lokasi Acara</p>
+                <p class="kata">Hotel Dymens Bukittinggi </p>
+                <p class="kata"> Jl. Nawawi, Tarok Dipo, Kec. Guguk Panjang, Kota Bukittinggi, Sumatera Barat 26138</p>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.756284242691!2d100.370535!3d-0.306161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd538bb8b8686d1%3A0x608e925b42603884!2sHotel%20Dymens!5e0!3m2!1sid!2sid!4v1710000000000!5m2!1sid!2sid"
+                    width="100%" height="250" style="border:0; margin-top: 15px;" allowfullscreen=""
+                    loading="lazy"></iframe>
+                <div style="margin-top: 15px;">
+                    <center> <a href="https://maps.app.goo.gl/NbsLVP3kLznNiivw9" target="_blank" class="btn-map">Buka
+                            Google
+                            Maps</a> </center>
+                </div>
+            </div>
+        </section>
+
+        <section class="story-section">
+            <h2 class="section-title">Our Story</h2>
+            <div class="story-container">
+                <div class="story-row left">
+                    <div class="story-bubble" onclick="openStory('cerita1')">Cerita berawal dari...</div>
+                </div>
+                <div class="story-row right">
+                    <div class="story-bubble" onclick="openStory('cerita2')">Keinginan untuk mengenal</div>
+                </div>
+                <div class="story-row left">
+                    <div class="story-bubble" onclick="openStory('cerita3')">Keadaan memperkuat keyakinan</div>
+                </div>
+                <div class="story-row right">
+                    <div class="story-bubble" onclick="openStory('cerita4')">Kebahagiaan atas penerimaan</div>
+                </div>
+            </div>
+            <div class="story-footer-text">
+                <p class="ucapan">Perjalanan ini tak akan pernah kami lupakan. Banyak rasa dan kejadian yang telah
+                    dilewati. Namun ini
+                    bukan akhir dari segalanya, banyak yang akan dilewati dan mungkin akan lebih sulit dari yang pernah
+                    dilewati. Kami yakin kepercayaan dan kasih sayang dapat menguatkan setiap perjalanan hidup kami.</p>
+                <p class="ucapan">Terimakasih yang teramat dalam kesemua orang yang berperan di perjalanan kami, serta
+                    kami memohon doa
+                    dan dukungan untuk perjalanan kami selanjutnya.</p>
+            </div>
+        </section>
+        <div id="story-modal" class="modal">
+            <div class="modal-content glass-card">
+                <span class="close-btn" onclick="closeStory()">×</span>
+                <h3 id="modal-title" class="script-name"></h3>
+                <p id="modal-desc"></p>
+            </div>
+        </div>
+
+        <section class="gallery">
+            <h2 class="section-title">Portraits of Us</h2>
+            <div class="gallery-wrapper">
+                <div class="gallery-container">
+                    <div class="gallery-item"><img src="prewed2.jpg"></div>
+                    <div class="gallery-item"><img src="prewed11.jpg"></div>
+                    <div class="gallery-item"><img src="prewed3.jpg"></div>
+                    <div class="gallery-item"><img src="prewed12.jpg"></div>
+                    <div class="gallery-item"><img src="prewed5.jpg"></div>
+                    <div class="gallery-item"><img src="prewed14.jpg"></div>
+                    <div class="gallery-item"><img src="prewed6.jpg"></div>
+                    <div class="gallery-item"><img src="prewed15.jpg"></div>
+                    <div class="gallery-item"><img src="prewed7.jpg"></div>
+                    <div class="gallery-item"><img src="prewed18.jpg"></div>
+                    <div class="gallery-item"><img src="prewed8.jpg"></div>
+                    <div class="gallery-item"><img src="prewed19.jpg"></div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="extra">
+            <h2 class="section-title">Wedding Gift</h2>
+            <p style="text-align: center; padding: 0 15px;">Your blessing and coming to our wedding are enough for us.
+                However, if you want to give a gift we provide a Digital Envelope to make it easier for you. thank you
+            </p>
+            <div class="bank-card">
+                <div class="bank-name">BANK BCA</div>
+                <div class="chip"></div>
+                <div class="card-number" id="norek-tobias">4760781989</div>
+                <div class="card-holder">Wyvanny Della</div>
+
+                <button class="btn-copy-card" data-rekening="4760781989" onclick="copyAction(this)">
+                    Copy
+                </button>
+            </div>
+            <div class="bank-card">
+                <div class="bank-name">BANK BRI</div>
+                <div class="chip"></div>
+                <div class="card-number" id="norek-tobias">093901021232536</div>
+                <div class="card-holder">Destra Panca Syahputra</div>
+
+                <button class="btn-copy-card" data-rekening="093901021232536" onclick="copyAction(this)">
+                    Copy
+                </button>
+            </div>
+        </section>
+
+        <section class="wish-section">
+            <h2 class="section-title">Ucapan & Doa</h2>
+            <div class="glass-card">
+                <form id="wish-form">
+                    <input type="text" id="nama" placeholder="Nama Anda" required>
+                    <textarea id="ucapan" rows="4" maxlength="200" placeholder="Tulis doa restu..." required></textarea>
+                    <div class="wa-button-group">
+                        <button type="submit" class="btn-gold" style="width: 100%; margin-bottom: 10px;">Kirim
+                            Ucapan</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="wish-display-container" class="wish-list">
+            </div>
+        </section>
+
+        <section id="live streaming">
+            <a href="https://www.instagram.com/desdos__?igsh=NzEyYWs1NWdhdDhs" target="_blank" class="btn-live">
+                Live Streaming
+            </a>
+        </section>
+        <p class="ucapan">
+            For family and friends who are unable to be present
+            in person, you are warmly invited to join our special
+            day via the live broadcast on Instagram.
+        </p>
+
+
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
