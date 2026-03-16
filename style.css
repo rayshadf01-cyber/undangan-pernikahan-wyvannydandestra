@@ -1,0 +1,724 @@
+/* --- 1. VARIABLES & RESET --- */
+:root {
+    --bg-dark: #1a0202;
+    --burgundy-deep: #3d0303;
+    --gold-bright: #d4af37;
+    /* Gue benerin warnanya dikit biar beneran Gold */
+    --gold-soft: #f1e5ac;
+    --white-ivory: #eeebe3;
+    --text-muted: #d1d1d1;
+    --wa-green: #25d366;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth !important;
+    font-size: clamp(14px, 1.2vw + 10px, 18px);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'tulisan', sans-serif;
+    color: var(--white-ivory);
+    background-color: var(--bg-dark);
+    overflow-x: hidden;
+}
+
+.bg-fixed {
+    position: fixed;
+    inset: 0;
+    /* Menggantikan top, left, width, height 100% */
+    width: 100%;
+    height: 100%;
+    background-image: url('prewed2.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    /* KUNCI UTAMA: Memaksa Hardware Acceleration */
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+body.locked {
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* --- 2. FIXED BACKGROUND --- */
+.bg-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('prewed2.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    will-change: transform;
+}
+
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 2, 2, 0.75);
+    z-index: -1;
+}
+
+/* --- 3. HERO SECTION (TETAP FULL SCREEN) --- */
+.hero {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url(bunga.jpg), url(prewed7.jpg);
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: soft-light;
+    z-index: 1000;
+    text-align: center;
+    transition: transform 0.8s ease-in-out;
+}
+
+.hero.slide-up {
+    transform: translateY(-100vh);
+}
+
+/* --- 4. SECTION DEFAULTS (BIAR RAPET) --- */
+section {
+    position: relative;
+    padding: 40px 20px;
+    /* Gue potong dari 80px ke 40px */
+    min-height: auto;
+    /* GAK LAGI MAKSA 100vh BIAR GAK KOSONG */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    z-index: 1;
+}
+
+.jarak {
+    padding: 10px 20px !important;
+    /* Super rapet buat bagian tertentu */
+}
+
+.subjudul {
+    font-family: 'bromello';
+    font-size: 45px;
+    /* Gue kecilin dikit biar gak menuhi layar */
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* --- 5. TYPOGRAPHY --- */
+h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+}
+h2.section-title, .subjudul {
+    font-size: clamp(2.8rem, 10vw, 5rem);
+    text-align: center;
+    margin-bottom: 20px; /*Tambah sedikit jarak ke countdown */
+}
+.script-name,
+.divider-ampersand {
+    font-family: 'tulisan', cursive;
+    color: var(--white-ivory);
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+.couple-title {
+    font-family: 'bromello';
+    /* Minimal 2.5rem, Ideal 8vw (8% lebar layar), Maksimal 4.5rem */
+    font-size: clamp(2.5rem, 8vw, 4.5rem); 
+    margin: 10px 0;
+    line-height: 1.1;
+}   
+
+.script-name {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    margin: 5px 0;
+}    
+
+.divider-ampersand {
+    font-size: 3rem;
+    margin: 10px 0;
+}
+
+.ucapan, .kata, p {
+    font-size: 1rem; /* Ini otomatis ngikutin ukuran dasar html di atas */
+    line-height: 1.6;
+    text-align: center;
+    text-justify: auto;
+}
+
+/* --- 6. COMPONENTS --- */
+.arch-frame {
+    width: 60vw; /* Lebar 60% dari layar HP */
+    max-width: 220px; /* Tapi jangan lebih dari 220px di laptop */
+    height: auto;
+    aspect-ratio: 5 / 7; /* Menjaga bentuk tetap estetik */
+    border-radius: 100px 100px 10px 10px;
+    margin: 15px auto;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.arch-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.3);
+}
+
+.glass-card {
+    background: rgba(61, 3, 3, 0.5);
+    /* Pake warna burgundy deep lo */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 450px;
+}
+
+.btn-gold {
+    background: rgba(61, 3, 3, 0.8);
+    color: #fff;
+    padding: 12px 30px;
+    border: 1px solid var(--white-ivory);
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-map {
+    display: inline-block;
+    /* Supaya bisa diatur margin-nya */
+    margin: 20px auto;
+    /* Margin otomatis kiri-kanan bikin dia ke tengah */
+    background: rgba(61, 3, 3, 0.8);
+    color: #fff;
+    padding: 14px 35px;
+    border: 1px solid white;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    /* Hilangkan garis bawah link */
+    text-align: center;
+    justify-content: center;
+}
+
+.btn-live {
+    display: inline-block;
+    /* Supaya bisa diatur margin-nya */
+    margin: 20px auto;
+    /* Margin otomatis kiri-kanan bikin dia ke tengah */
+    background: rgba(61, 3, 3, 0.8);
+    color: #fff;
+    padding: 14px 35px;
+    border: 1px solid white;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    /* Hilangkan garis bawah link */
+    text-align: center;
+    justify-content: center;
+    font-family: 'bromello';
+}
+.btn-gold, .btn-map, .btn-live {
+    width: 85%; /* Lebar tombol menyesuaikan layar */
+    max-width: 300px;
+    padding: 12px 20px;
+    font-size: 1rem;
+}
+/* --- 7. COUNTDOWN (Ukuran Pas & Proporsional) --- */
+.countdown-container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Memastikan barisan kotak ada di tengah */
+}
+
+.countdown-row {
+    display: flex;
+    gap: 10px; /* Jarak antar kotak */
+    justify-content: center; 
+    width: 100%;
+    flex-wrap: nowrap; /* Memastikan tetap sejajar horizontal jika muat */
+}
+
+.count-box {
+    /* Ukuran tetap agar jadi persegi yang pas */
+    width: 70px; 
+    height: 70px;
+    
+    /* Kalau di HP mau lebih fleksibel tapi tetep kotak */
+    max-width: 20vw; 
+    aspect-ratio: 1 / 1; 
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(61, 3, 3, 0.8);
+    border: 1px solid var(--white-ivory);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+/* Hilangkan flex: 1 agar kotak tidak melebar paksa */
+.count-box, .count-box.large {
+    flex: none; 
+}
+
+.count-box span {
+    display: block;
+    font-size: clamp(1.2rem, 4vw, 1.8rem); /* Ukuran angka disesuaikan */
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.count-box p {
+    margin: 0;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+}
+
+/* --- DESAIN TANGGAL KHUSUS --- */
+.tanggal-desain {
+    text-align: center;
+    color: var(--white-ivory);
+    margin: 20px 0;
+}
+
+.hari-teks {
+    font-family: 'bromello';
+    /* Pakai font latin lo */
+    font-size: 50px;
+    margin-bottom: -10px;
+    /* Biar lebih deket sama angkanya */
+}
+
+.tgl-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-family: 'bromello';
+    /* Sesuaikan jika ingin font latin semua */
+    font-size: 35px;
+}
+
+.tgl-angka {
+    font-size: 55px;
+    /* Angka 28 dibikin lebih gede */
+    font-weight: bold;
+}
+
+.garis-pembatas {
+    width: 2px;
+    height: 60px;
+    /* Tinggi garis vertikal */
+    background-color: var(--white-ivory);
+}
+
+/* Biar rapi di HP */
+@media (max-width: 480px) {
+    .hari-teks {
+        font-size: 40px;
+    }
+
+    .tgl-row {
+        font-size: 25px;
+        gap: 10px;
+    }
+
+    .tgl-angka {
+        font-size: 45px;
+    }
+
+    .garis-pembatas {
+        height: 45px;
+    }
+}
+
+/* --- 8. STORY SECTION (VERSI RAPI & BERSIH) --- */
+.story-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Jarak antar bubble lebih lega sedikit */
+    max-width: 500px;
+    margin: 20px auto;
+    width: 100%;
+    padding: 0 15px;
+    /* Jarak aman biar gak nempel pinggir layar HP */
+
+}
+
+.story-row {
+    display: flex;
+    width: 100%;
+}
+
+/* Mengatur posisi selang-seling tanpa bantuan garis */
+.story-row.left {
+    justify-content: flex-start;
+}
+
+.story-row.right {
+    justify-content: flex-end;
+}
+
+.story-bubble {
+    /* Background transparan sesuai request */
+    background: rgba(61, 3, 3, 0.8) !important;
+
+    /* GARIS TEPI PUTIH (Gue set 2px biar gak terlalu tebel, kalau kurang tebel ganti ke 5px) */
+    border: 1px solid #ffffff !important;
+
+    padding: 14px 22px;
+    border-radius: 25px;
+    cursor: pointer;
+    max-width: 80%;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, background 0.2s ease;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #ffffff;
+    /* Pastikan warna teks juga putih biar kebaca */
+}
+
+/* Efek pas ditekan jari (Feedback ke user) */
+.story-bubble:active {
+    transform: scale(0.96);
+    background: #5a0505;
+    /* Warna agak terang dikit pas diklik */
+    border-color: 10 px solid white;
+}
+
+/* --- 9. GALLERY --- */
+.gallery-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100vw;
+    overflow-x: auto;
+    display: flex;
+    padding: 20px 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.gallery-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-container {
+    display: flex;
+    gap: 15px;
+    padding: 0 30px;
+}
+
+.gallery-item {
+    flex: 0 0 260px;
+    height: 380px;
+    scroll-snap-align: center;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.gallery-item img {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+/* --- 10. FORM UCAPAN --- */
+#wish-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* --- UPDATE TAMPILAN CONTAINER UCAPAN --- */
+
+/* Gabungkan selector biar gak bentrok */
+/* --- UPDATE CONTAINER UCAPAN UNTUK AUTOSCROLL --- */
+#wish-display-container.wish-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    width: 100%;
+    max-width: 450px;
+    margin: 20px auto;
+    
+    height: 400px; 
+    overflow-y: auto; /* SEKARANG BISA DI-SCROLL PAKE JARI */
+    scroll-behavior: smooth;
+    
+    background: rgba(61, 3, 3, 0.3);
+    border-radius: 15px;
+
+    /* Sembunyikan scrollbar di Chrome/Safari biar tetep estetik */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+#wish-display-container.wish-list::-webkit-scrollbar { 
+    display: none; /* Chrome, Safari, Opera */
+}
+#wish-display-container::-webkit-scrollbar-thumb {
+    background: #d4af37;
+    border-radius: 10px;
+}
+.wish-item {
+    background: rgba(61, 3, 3, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 4px solid #d4af37;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+
+    /* Tambahan biar teks panjang nggak berantakan */
+    word-wrap: break-word;
+}
+
+/* Styling isi ucapan */
+.wish-item {
+    background: rgba(255, 255, 255, 0.1); /* Efek glassmorphism */
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #d4af37; /* Garis emas di pinggir */
+}
+
+/* Gedein Font Nama */
+.wish-item h4 {
+    font-size: 1.2rem; /* Ukuran lebih gede */
+    margin-bottom: 5px;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+/* Gedein Font Ucapan */
+.wish-item p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #eee;
+}
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- 11. MODAL & MUSIC --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.1);
+    /* Area luar jadi gelap transparan */
+}
+
+.modal-content {
+    background: rgba(61, 3, 3, 1);
+    /* Warna Burgundy Transparan */
+    margin: 15% auto;
+    padding: 25px;
+    width: 85%;
+    max-width: 500px;
+    border-radius: 20px;
+    color: #fff;
+    position: relative;
+    /* GARIS TEPI PUTIH SESUAI REQUEST */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+#music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--burgundy-deep);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+/* Font Face */
+@font-face {
+    font-family: 'tulisan';
+    src: url('1840-font.otf');
+}
+
+@font-face {
+    font-family: 'bromello';
+    src: url('bromello.regular.ttf');
+}
+/* --- PERBAIKAN AKHIR RESPONSIF --- */
+
+/* Buat teks Arab supaya tetap proporsional dan ke tengah */
+h1 {
+    line-height: 1.8;
+    margin: 20px 0;
+    word-break: break-word; /* Biar teks Arab gak kepotong */
+}
+
+/* Pastikan container utama gak punya padding kegedean di HP */
+main {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Update Media Query lo biar lebih 'nendang' */
+@media (max-width: 480px) {
+    .hari-teks {
+        font-size: 35px; /* Sedikit lebih kecil */
+    }
+
+    .tgl-row {
+        font-size: 20px;
+        gap: 8px;
+    }
+
+    .tgl-angka {
+        font-size: 40px;
+    }
+
+    .garis-pembatas {
+        height: 35px;
+        width: 1px; /* Garis lebih tipis di HP */
+    }
+    
+    /* Supaya bubble cerita gak terlalu lebar di layar mungil */
+    .story-bubble {
+        max-width: 90%;
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+}
+/* --- 12. WEDDING GIFT (Ukuran Lebih Kecil & Elegan) --- */
+.bank-card {
+    width: 90%; /* Memberi sedikit ruang di pinggir layar HP */
+    max-width: 300px; /* Kita kecilkan dari 350px ke 300px */
+    height: 180px; /* Kita pendekkan dari 200px ke 180px */
+    background: rgba(61, 3, 3, 0.5); 
+    backdrop-filter: blur(10px);
+    border-radius: 15px; /* Radius lebih kecil supaya terlihat tegas */
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    margin: 15px auto;
+    color: var(--white-ivory);
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+}
+
+.bank-name {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem; /* Ukuran teks bank dikecilkan */
+    color: var(--gold-bright);
+}
+
+.chip {
+    width: 38px; /* Chip dikecilkan sedikit */
+    height: 28px;
+    background: linear-gradient(135deg, #f0d07a 0%, #b8953d 100%);
+    border-radius: 4px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+
+.card-number {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem; /* Ukuran angka kartu dikecilkan */
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+}
+
+.card-holder {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem; /* Ukuran nama pemilik dikecilkan */
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.btn-copy-card {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    padding: 5px 12px;
+    font-size: 0.75rem; /* Tombol copy lebih mungil */
+}
+
+.btn-copy-card:hover {
+    background: var(--gold-bright);
+    color: var(--burgundy-deep);
+}   
+
+/* Kode untuk memperbesar khusus judul Save The Date */
+.title-besar {
+    font-size: clamp(3.5rem, 12vw, 6rem) !important;
+    margin-bottom: 30px;
+    display: block;
+    width: 100%;
+    text-align: center; /* Memastikan teks di tengah */
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
