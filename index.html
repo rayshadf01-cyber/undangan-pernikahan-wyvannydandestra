@@ -252,7 +252,22 @@
 
 
     </main>
-    <script src="script.js"></script>
+    <script src="script.js">
+   
+function copyAction(btn) {
+    const norek = btn.getAttribute('data-rekening');
+    const el = document.createElement('textarea');
+    el.value = norek;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+
+    const originalText = btn.innerHTML;
+    btn.innerHTML = "Copied!";
+    setTimeout(() => { btn.innerHTML = originalText; }, 2000);
+}
+</script>
 </body>
 
 </html>
