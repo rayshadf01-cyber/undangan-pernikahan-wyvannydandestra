@@ -310,32 +310,65 @@ if (wishForm) {
 // Jangan lupa panggil loadWishes pas halaman beres loading
 document.addEventListener('DOMContentLoaded', loadWishes);
 
-function copyAction(btn) {
+// --- BAGIAN COPY REKENING (GANTI SEMUA DI BAGIAN BAWAH SCRIPT.JS) ---
+
+function showCopyFeedback(btn) {
+    const originalText = btn.innerHTML;
+    btn.innerHTML = "Copied!";
+    btn.style.background = "#d4af37";
+    btn.style.color = "#3d0303";
+
+    setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.style.background = "rgba(255, 255, 255, 0.1)";
+        btn.style.color = "white";
+    }, 2000);
+}
+
 function copyAction(btn) {
     // 1. Ambil nomor REK langsung dari atribut data tombolnya
     const norek = btn.getAttribute('data-rekening');
     
-    // 2. Gunakan Navigator API (Modern & Akurat)
+    // 2. Cek apakah navigator.clipboard tersedia (untuk HTTPS/Localhost)
     if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(norek).then(() => {
-            showCopyFeedback(btn);
-        });
+        navigator.clipboard.writeText(norek)
+            .then(() => {
+                showCopyFeedback(btn);
+            })
+            .catch(err => {
+                console.error('Gagal copy: ', err);
+                fallbackCopyTextToClipboard(norek, btn);
+            });
     } else {
-        // Fallback untuk HP/Browser lama
-        const textArea = document.createElement("textarea");
-        textArea.value = norek;
-        document.body.appendChild(textArea);
-        textArea.select();
-        try {
-            document.execCommand('copy');
-            showCopyFeedback(btn);
-        } catch (err) {
-            console.error('Gagal copy', err);
-        }
-        document.body.removeChild(textArea);
+        // 3. Fallback jika tidak support navigator.clipboard (Browser HP lama/HTTP)
+        fallbackCopyTextToClipboard(norek, btn);
     }
 }
-    // Efek Visual Tombol
+
+function fallbackCopyTextToClipboard(text, btn) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    
+    // Pastikan tidak terlihat tapi tetap bisa di-select
+    textArea.style.position = "fixed";
+    textArea.style.left = "-9999px";
+    textArea.style.top = "0";
+    document.body.appendChild(textArea);
+    
+    textArea.focus();
+    textArea.select();
+
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            showCopyFeedback(btn);
+        }
+    } catch (err) {
+        console.error('Fallback copy gagal', err);
+    }
+
+    document.body.removeChild(textArea);
+}    // Efek Visual Tombol
     const originalText = btn.innerHTML;
     btn.innerHTML = "Copied!";
     btn.style.background = "#d4af37";
