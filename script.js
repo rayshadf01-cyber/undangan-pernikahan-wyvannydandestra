@@ -311,30 +311,30 @@ if (wishForm) {
 document.addEventListener('DOMContentLoaded', loadWishes);
 
 function copyAction(btn) {
-    // Ambil angka dari atribut data-rekening
+function copyAction(btn) {
+    // 1. Ambil nomor REK langsung dari atribut data tombolnya
     const norek = btn.getAttribute('data-rekening');
     
-    // Gunakan cara TextArea (paling ampuh untuk semua jenis HP)
-    const el = document.createElement('textarea');
-    el.value = norek;
-    el.setAttribute('readonly', '');
-    el.style.position = 'absolute';
-    el.style.left = '-9999px';
-    document.body.appendChild(el);
-    
-    const selected = document.getSelection().rangeCount > 0 
-        ? document.getSelection().getRangeAt(0) 
-        : false;
-        
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-
-    if (selected) {
-        document.getSelection().removeAllRanges();
-        document.getSelection().addRange(selected);
+    // 2. Gunakan Navigator API (Modern & Akurat)
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(norek).then(() => {
+            showCopyFeedback(btn);
+        });
+    } else {
+        // Fallback untuk HP/Browser lama
+        const textArea = document.createElement("textarea");
+        textArea.value = norek;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showCopyFeedback(btn);
+        } catch (err) {
+            console.error('Gagal copy', err);
+        }
+        document.body.removeChild(textArea);
     }
-
+}
     // Efek Visual Tombol
     const originalText = btn.innerHTML;
     btn.innerHTML = "Copied!";
